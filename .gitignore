@@ -13,3 +13,6 @@ x64/Debug/PhoenixSandbox.exe
 x64/Debug/PhoenixSandbox.exe - Shortcut.lnk
 *.ilk
 *.recipe
+vendor/Vulkan/x64/shaderc_combinedd.lib
+vendor/Vulkan/x64/SPIRV-Tools-optd.lib
+vendor/Vulkan/x64/shaderc_combined.lib
