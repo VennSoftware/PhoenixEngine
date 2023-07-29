@@ -19,19 +19,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\vendor\glad\src\glad.c" />
+    <ClCompile Include="include\Phoenix\gl\GLBuffer.cpp" />
+    <ClCompile Include="src\opengl\OpenGL.cpp" />
+    <ClCompile Include="src\renderer\Buffer.cpp" />
+    <ClCompile Include="src\stb_image.cpp" />
     <ClCompile Include="src\vulkan\Context.cpp" />
     <ClCompile Include="src\vulkan\Device.cpp" />
     <ClCompile Include="src\vulkan\GraphicsPipeline.cpp" />
     <ClCompile Include="src\vulkan\PhysDevice.cpp" />
     <ClCompile Include="src\vulkan\RenderQueue.cpp" />
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Phoenix\Core.hpp" />
+    <ClInclude Include="include\Phoenix\gl\GLBuffer.hpp" />
+    <ClInclude Include="include\Phoenix\gl\OpenGL.hpp" />
+    <ClInclude Include="include\Phoenix\RendererAPI.hpp" />
+    <ClInclude Include="include\Phoenix\renderer\Buffer.hpp" />
     <ClInclude Include="include\Phoenix\vk\Context.hpp" />
     <ClInclude Include="include\Phoenix\vk\Device.hpp" />
     <ClInclude Include="include\Phoenix\vk\GraphicsPipeline.hpp" />
     <ClInclude Include="include\Phoenix\vk\PhysDevice.hpp" />
     <ClInclude Include="include\Phoenix\vk\RenderQueue.hpp" />
     <ClInclude Include="include\Phoenix\vk\Surface.hpp" />
+    <ClInclude Include="include\Phoenix\Window.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -87,22 +99,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)vendor\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)vendor\GLFW\x64;$(SolutionDir)vendor\Vulkan\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)vendor\GLFW\x64;$(VULKAN_SDK)\Lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(SolutionDir)PheonixEngine\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)vendor\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)vendor\GLFW\x64;$(SolutionDir)vendor\Vulkan\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)vendor\GLFW\x64;$(VULKAN_SDK)\Lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(SolutionDir)PheonixEngine\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)vendor\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)vendor\GLFW\x64;$(SolutionDir)vendor\Vulkan\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)vendor\GLFW\x64;$(VULKAN_SDK)\Lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(SolutionDir)PheonixEngine\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)vendor\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)vendor\GLFW\x64;$(SolutionDir)vendor\Vulkan\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)vendor\GLFW\x64;$(VULKAN_SDK)\Lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(SolutionDir)PheonixEngine\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -121,7 +133,7 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
@@ -144,7 +156,7 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
@@ -164,7 +176,7 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
@@ -187,7 +199,7 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>

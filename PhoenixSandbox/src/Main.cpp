@@ -1,29 +1,18 @@
-#include <Phoenix/vk/Context.hpp>
-#include <Phoenix/vk/RenderQueue.hpp>
+#define PHNX_USE_OPENGL
+#include <Phoenix/Core.hpp>
+#include <Phoenix/Window.hpp>
+
 int main() {
-	using namespace phoenix::vk;
-	ContextSpec spec{};
-
-	spec.appName = "PhoenixSandbox";
-	spec.engineName = "Phoenix";
+	phoenix::WindowSpec spec{};
+	spec.contextType = phoenix::ContextType::OpenGL;
+	spec.width = 1080;
 	spec.height = 720;
-	spec.width = 720;
-	spec.title = "Phoenix Sandbox";
+	spec.title = "Phoenix App";
+	spec.useVsync = true;
 
-	Context ctx(spec);
+	phoenix::Window window = phoenix::Window::Create(spec);
 
-	std::shared_ptr<RenderQueue> rq = ctx.GetRenderQueue();
-
-	while (ctx.IsActive()) {
-		ctx.PollEvents();
-		ctx.StartFrame();
-		rq->SetViewPort(0, 0, spec.width, spec.height);
-		rq->DrawArrays(3);
-		ctx.EndFrame();
+	while (window.IsActive()) {
+		window.Update();
 	}
-
-	ctx.Destroy();
-
-	return EXIT_SUCCESS;
-	
 }
