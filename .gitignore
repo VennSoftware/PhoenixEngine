@@ -1,0 +1,15 @@
+
+**/.vs/**
+Debug/**
+*.obj
+*.tlog
+PheonixEngine/x64/Debug/PhoenixEngine.vcxproj.FileListAbsolute.txt
+*.idb
+*.log
+PhoenixSandbox/x64/Debug/PhoenixSandbox.vcxproj.FileListAbsolute.txt
+*.pdb
+x64/Debug/PhoenixEngine.lib
+x64/Debug/PhoenixSandbox.exe
+x64/Debug/PhoenixSandbox.exe - Shortcut.lnk
+*.ilk
+*.recipe
