@@ -2,7 +2,7 @@
 #include "Core.hpp"
 
 // Forward Decls
-typedef struct GLFWwindow;
+struct GLFWwindow;
 
 namespace phoenix {
 
