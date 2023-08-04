@@ -13,54 +13,123 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{2be46a35-5d4f-4940-989c-6851e2f2ecf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vendor Source">
+      <UniqueIdentifier>{95fff1af-4f29-42c0-9705-3f1f63833ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{19bd645b-77d7-4b24-92a6-c7823653ba78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\graphics">
+      <UniqueIdentifier>{8d7c36a1-e05b-4fb8-b59d-7f871553317d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\graphics\OpenGL">
+      <UniqueIdentifier>{a4429f1c-2264-48f4-a3ac-cc07f3ab5599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\graphics\renderer">
+      <UniqueIdentifier>{c0d8e9f5-742e-4628-aeac-273390c2edaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\graphics">
+      <UniqueIdentifier>{ce91c0a9-0ab5-47ee-a87b-803957749c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\graphics\Renderer">
+      <UniqueIdentifier>{c62ad681-d09a-4970-9bc1-0a10e7fb4a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\graphics\OpenGL">
+      <UniqueIdentifier>{5159881f-6f21-4126-84d5-ed223a59faeb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\vulkan\Context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vulkan\PhysDevice.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vulkan\Device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\vulkan\RenderQueue.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\stb_image.cpp">
+      <Filter>Source Files\Vendor Source</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\glad\src\glad.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Vendor Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\Window.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\vendor\imgui-docking\imgui.cpp">
+      <Filter>Source Files\Vendor Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\stb_image.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\vendor\imgui-docking\imgui_demo.cpp">
+      <Filter>Source Files\Vendor Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui-docking\imgui_draw.cpp">
+      <Filter>Source Files\Vendor Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui-docking\imgui_tables.cpp">
+      <Filter>Source Files\Vendor Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui-docking\imgui_widgets.cpp">
+      <Filter>Source Files\Vendor Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui-docking\backends\imgui_impl_glfw.cpp">
+      <Filter>Source Files\Vendor Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui-docking\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\Vendor Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Window.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Application.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\opengl\OpenGL.cpp">
+      <Filter>Source Files\graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\opengl\Buffer.cpp">
+      <Filter>Source Files\graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\opengl\Shader.cpp">
+      <Filter>Source Files\graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\Renderer2D.cpp">
+      <Filter>Source Files\graphics\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\OrthoCamera.cpp">
+      <Filter>Source Files\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\opengl\Texture.cpp">
+      <Filter>Source Files\graphics\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Phoenix\vk\Context.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Phoenix\vk\Device.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Phoenix\vk\PhysDevice.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Phoenix\vk\Surface.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Phoenix\vk\GraphicsPipeline.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Phoenix\vk\RenderQueue.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Phoenix\Core.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="include\Phoenix\Window.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="include\Phoenix\Types.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\core\Common.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\core\Window.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\core\Application.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\graphics\RenderPipeline.hpp">
+      <Filter>Header Files\graphics\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\graphics\opengl\Buffer.hpp">
+      <Filter>Header Files\graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\graphics\opengl\OpenGL.hpp">
+      <Filter>Header Files\graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\graphics\opengl\Shader.hpp">
+      <Filter>Header Files\graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\graphics\Renderer2D.hpp">
+      <Filter>Header Files\graphics\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\graphics\OrthoCamera.hpp">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\graphics\opengl\Texture.hpp">
+      <Filter>Header Files\graphics\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

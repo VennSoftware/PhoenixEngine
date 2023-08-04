@@ -1,0 +1,192 @@
+{
+  "main": {
+    "id": "a7687a0aa33eab06",
+    "type": "split",
+    "children": [
+      {
+        "id": "ee3b087da6a9b422",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cbdd714bd8bf2f8c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "94263d6060bb4e07",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "docs/User Guide.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cc0e3670a7d90574",
+    "type": "split",
+    "children": [
+      {
+        "id": "8860c24356004e61",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "130a9327ef12e52d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2676e2cdd5726e2c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "f2291b7d253c8661",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e521d45739d2be9d",
+    "type": "split",
+    "children": [
+      {
+        "id": "8ca1e7994addddff",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f4ebd0e96dddb216",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "docs/User Guide.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6aae1dced97b5a00",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "docs/User Guide.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "75a29780f9eeddea",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "98c9224d057a5a8c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "docs/User Guide.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "94263d6060bb4e07",
+  "lastOpenFiles": [
+    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link.read.11.tlog",
+    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link-cvtres.write.1.tlog",
+    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link-cvtres.read.1.tlog",
+    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link-rc.write.1.tlog",
+    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link-rc.read.1.tlog",
+    "PhoenixSandbox/x64/Release/Main.obj",
+    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/unsuccessfulbuild",
+    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link.read.17.tlog",
+    "PheonixEngine/x64/Release/Texture.obj",
+    "PheonixEngine/x64/Release/PhoenixEngine.tlog/unsuccessfulbuild",
+    "PheonixEngine/src/graphics/opengl/Texture.cpp",
+    "README.md",
+    "vendor/imgui-docking/misc/freetype/README.md",
+    "vendor/imgui-docking/examples/example_sdl3_opengl3/README.md",
+    "vendor/imgui-docking/examples/example_sdl2_sdlrenderer2/README.md",
+    "vendor/imgui-docking/examples/example_sdl2_opengl3/README.md",
+    "vendor/imgui-docking/examples/example_sdl2_opengl2/README.md",
+    "vendor/imgui-docking/examples/example_emscripten_wgpu/README.md",
+    "vendor/imgui-docking/examples/example_apple_metal/README.md",
+    "vendor/imgui-docking/examples/example_allegro5/README.md",
+    "vendor/imgui-docking/docs/README.md",
+    "vendor/imgui-docking/docs/FONTS.md",
+    "vendor/imgui-docking/docs/FAQ.md",
+    "vendor/imgui-docking/docs/EXAMPLES.md",
+    "vendor/imgui-docking/docs/CONTRIBUTING.md",
+    "vendor/imgui-docking/docs/BACKENDS.md",
+    "docs/User Guide.md"
+  ]
+}

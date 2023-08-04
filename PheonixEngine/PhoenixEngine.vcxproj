@@ -20,22 +20,36 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\vendor\glad\src\glad.c" />
+    <ClCompile Include="..\vendor\imgui-docking\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\vendor\imgui-docking\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\vendor\imgui-docking\imgui.cpp" />
+    <ClCompile Include="..\vendor\imgui-docking\imgui_demo.cpp" />
+    <ClCompile Include="..\vendor\imgui-docking\imgui_draw.cpp" />
+    <ClCompile Include="..\vendor\imgui-docking\imgui_tables.cpp" />
+    <ClCompile Include="..\vendor\imgui-docking\imgui_widgets.cpp" />
+    <ClCompile Include="src\core\Application.cpp" />
+    <ClCompile Include="src\core\Window.cpp" />
+    <ClCompile Include="src\graphics\opengl\Buffer.cpp" />
+    <ClCompile Include="src\graphics\opengl\OpenGL.cpp" />
+    <ClCompile Include="src\graphics\opengl\Shader.cpp" />
+    <ClCompile Include="src\graphics\opengl\Texture.cpp" />
+    <ClCompile Include="src\graphics\OrthoCamera.cpp" />
+    <ClCompile Include="src\graphics\Renderer2D.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
-    <ClCompile Include="src\vulkan\Context.cpp" />
-    <ClCompile Include="src\vulkan\Device.cpp" />
-    <ClCompile Include="src\vulkan\PhysDevice.cpp" />
-    <ClCompile Include="src\vulkan\RenderQueue.cpp" />
-    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Phoenix\Core.hpp" />
-    <ClInclude Include="include\Phoenix\vk\Context.hpp" />
-    <ClInclude Include="include\Phoenix\vk\Device.hpp" />
-    <ClInclude Include="include\Phoenix\vk\GraphicsPipeline.hpp" />
-    <ClInclude Include="include\Phoenix\vk\PhysDevice.hpp" />
-    <ClInclude Include="include\Phoenix\vk\RenderQueue.hpp" />
-    <ClInclude Include="include\Phoenix\vk\Surface.hpp" />
-    <ClInclude Include="include\Phoenix\Window.hpp" />
+    <ClInclude Include="include\Phoenix\core\Application.hpp" />
+    <ClInclude Include="include\Phoenix\core\Common.hpp" />
+    <ClInclude Include="include\Phoenix\core\Window.hpp" />
+    <ClInclude Include="include\Phoenix\graphics\opengl\Buffer.hpp" />
+    <ClInclude Include="include\Phoenix\graphics\opengl\OpenGL.hpp" />
+    <ClInclude Include="include\Phoenix\graphics\opengl\Shader.hpp" />
+    <ClInclude Include="include\Phoenix\graphics\opengl\Texture.hpp" />
+    <ClInclude Include="include\Phoenix\graphics\OrthoCamera.hpp" />
+    <ClInclude Include="include\Phoenix\graphics\Renderer2D.hpp" />
+    <ClInclude Include="include\Phoenix\graphics\RenderPipeline.hpp" />
+    <ClInclude Include="include\Phoenix\Types.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -113,7 +127,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PHNX_USE_OPENGL;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -127,7 +141,7 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
@@ -137,12 +151,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PHNX_USE_OPENGL;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <ShowIncludes>false</ShowIncludes>
       <UseFullPaths>false</UseFullPaths>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,15 +167,15 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PHNX_USE_OPENGL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -174,7 +189,7 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
@@ -184,12 +199,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PHNX_USE_OPENGL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <ShowIncludes>false</ShowIncludes>
       <UseFullPaths>false</UseFullPaths>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -199,8 +215,8 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
