@@ -11,8 +11,11 @@ MessageCallback(GLenum source,
 	const void* userParam)
 {
 	switch (type) {
-	case GL_DEBUG_TYPE_ERROR: PHNX_ERROR("GL ERROR: %s", message); break;
-	case GL_DEBUG_TYPE_PERFORMANCE: PHNX_WARN("GL PERF: %s", message); break;
+	case GL_DEBUG_TYPE_ERROR:
+		if (id != 0x502)
+			PHNX_ERROR("GL ERROR 0x%x: %s",id, message);
+		break;
+	case GL_DEBUG_TYPE_PERFORMANCE: PHNX_WARN("GL PERF 0x%x: %s", id, message); break;
 	}
 }
 void phnx::gfx::InitializeOpenGL()

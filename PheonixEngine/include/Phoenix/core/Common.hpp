@@ -21,7 +21,7 @@
 
 
 #ifdef _DEBUG
-#define GL_CALL(_CALL)      do { _CALL; GLenum gl_err = glGetError(); if (gl_err != 0) fprintf(stderr, "GL error 0x%x returned from '%s'. (File %s, Line %d)\n", gl_err, #_CALL, __FILE__, __LINE__); } while (0)  // Call with error check
+#define GL_CALL(_CALL) _CALL    /* do { _CALL; GLenum gl_err = glGetError(); if (gl_err != 0) fprintf(stderr, "GL error 0x%x returned from '%s'. (File %s, Line %d)\n", gl_err, #_CALL, __FILE__, __LINE__); } while (0)  // Call with error check */
 #else
 #define GL_CALL(_CALL) _CALL
 #endif

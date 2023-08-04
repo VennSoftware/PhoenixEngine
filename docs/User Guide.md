@@ -18,11 +18,10 @@ After the repo has been cloned, open the Phoenix.sln Solution and Build.
 
 class PhoenixApp : public phnx::Application {
 	virtual void OnUpdate(float timestep) override {
-
+		// Runs Before OnRender();
 	}
 
 	virtual void OnRender() override {
-		
 	}
 };
 

@@ -26,19 +26,20 @@ namespace phnx {
 				SetFloats(data.data(), data.size());
 			}
 
-			void VertexBuffer::SetVertices(const std::vector<Vertex>& vertices)
-			{
-				SetData(vertices.data(), vertices.size() * sizeof(Vertex));
-				SetLayout(0, 3, GL_FLOAT, false, sizeof(Vertex), offsetof(Vertex, position));
-				SetLayout(1, 3, GL_FLOAT, false, sizeof(Vertex), offsetof(Vertex, color));
-			}
-
-			void VertexBuffer::SetVertices(Vertex* vertices, size_t length)
+			void VertexBuffer::SetVertices(const Vertex* vertices, size_t length)
 			{
 				SetData(vertices, length * sizeof(Vertex));
 				SetLayout(0, 3, GL_FLOAT, false, sizeof(Vertex), offsetof(Vertex, position));
 				SetLayout(1, 3, GL_FLOAT, false, sizeof(Vertex), offsetof(Vertex, color));
+				SetLayout(2, 2, GL_FLOAT, false, sizeof(Vertex), offsetof(Vertex, uv0));
 			}
+
+			void VertexBuffer::SetVertices(const std::vector<Vertex>& vertices)
+			{
+				SetVertices(vertices.data(), vertices.size());
+			}
+
+			
 
 			void VertexBuffer::SetData(const void* data, size_t size)
 			{

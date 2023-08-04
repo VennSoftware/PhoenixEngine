@@ -10,6 +10,7 @@ namespace phnx {
 			struct Vertex {
 				glm::vec3 position;
 				glm::vec3 color;
+				glm::vec2 uv0;
 			};
 
 			class VertexBuffer
@@ -20,7 +21,7 @@ namespace phnx {
 				void SetFloats(const float* data, size_t size);
 				void SetFloats(const std::vector<float>& data);
 				void SetVertices(const std::vector<Vertex>& vertices);
-				void SetVertices(Vertex* vertices, size_t length);
+				void SetVertices(const Vertex* vertices, size_t length);
 				void SetData(const void* data, size_t size);
 				void SetLayout(int index, int size, int type, bool normalized = false, size_t stride = 0, size_t offset = 0);
 				void Unbind();

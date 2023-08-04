@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/User Guide.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/User Guide.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/User Guide.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/User Guide.md"
+                "file": "README.md"
               }
             }
           }
@@ -161,18 +161,19 @@
   },
   "active": "94263d6060bb4e07",
   "lastOpenFiles": [
-    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link.read.11.tlog",
-    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link-cvtres.write.1.tlog",
-    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link-cvtres.read.1.tlog",
-    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link-rc.write.1.tlog",
-    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link-rc.read.1.tlog",
-    "PhoenixSandbox/x64/Release/Main.obj",
-    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/unsuccessfulbuild",
-    "PheonixEngine/include.zip",
-    "x64/Debug/PhoenixEngine_debug.lib",
-    "x64/Debug/PhoenixEngine - Copy.lib",
-    "PhoenixSandbox/x64/Release/PhoenixSandbox.tlog/link.read.17.tlog",
+    "docs/User Guide.md",
     "README.md",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/link.44816.write.1.tlog",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/link.44816.read.1.tlog",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/link.44816.read.2.tlog",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/link.44816-cvtres.write.1.tlog",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/link.44816-cvtres.read.1.tlog",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/link.44816-rc.write.1.tlog",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/link.44816-rc.read.1.tlog",
+    "PhoenixSandbox/x64/Debug/Main.obj",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/unsuccessfulbuild",
+    "PhoenixSandbox/x64/Debug/PhoenixSandbox.tlog/link.read.2.tlog",
+    "assets/textures/aliens.png",
     "vendor/imgui-docking/misc/freetype/README.md",
     "vendor/imgui-docking/examples/example_sdl3_opengl3/README.md",
     "vendor/imgui-docking/examples/example_sdl2_sdlrenderer2/README.md",
@@ -186,7 +187,6 @@
     "vendor/imgui-docking/docs/FAQ.md",
     "vendor/imgui-docking/docs/EXAMPLES.md",
     "vendor/imgui-docking/docs/CONTRIBUTING.md",
-    "vendor/imgui-docking/docs/BACKENDS.md",
-    "docs/User Guide.md"
+    "vendor/imgui-docking/docs/BACKENDS.md"
   ]
 }

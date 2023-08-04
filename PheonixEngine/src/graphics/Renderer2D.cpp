@@ -24,6 +24,9 @@ uint32_t phnx::gfx::Renderer2D::s_vertexCount;
 uint32_t* phnx::gfx::Renderer2D::s_tris;
 phnx::gfx::buffers::Vertex* phnx::gfx::Renderer2D::s_verts;
 
+phnx::gfx::Texture phnx::gfx::Renderer2D::s_diffuse;
+phnx::gfx::Texture phnx::gfx::Renderer2D::s_whiteTex;
+
 struct GLQueryTimer {
 	uint32_t m_startID, m_endID;
 
@@ -46,6 +49,13 @@ void phnx::gfx::Renderer2D::Initialize()
 
 	s_verts = (buffers::Vertex*) std::malloc(sizeof(buffers::Vertex) * 4 * c_MAX_QUADS);
 	s_tris = (uint32_t*) std::malloc(sizeof(uint32_t) * 6 * c_MAX_QUADS);
+	uint8_t pixels[] = { 
+		0xFF, 0xFF, 0xFF, 0xFF,
+		0xFF, 0xFF, 0xFF, 0xFF,
+		0xFF, 0xFF, 0xFF, 0xFF,
+		0xFF, 0xFF, 0xFF, 0xFF,
+	};
+	s_whiteTex = Texture(2, 2, pixels);
 }
 
 void phnx::gfx::Renderer2D::BeginScene(const glm::mat4& viewProj)
@@ -70,23 +80,25 @@ void phnx::gfx::Renderer2D::EndScene() {
 void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec4& color)
 {
 	s_quadCount++;
-	if (s_vertexCount > c_MAX_QUADS * 4) { Flush(); }
+	if (s_vertexCount > c_MAX_QUADS * 4 || s_whiteTex.Handle() != s_diffuse.Handle()) { Flush(); }
 
 	glm::mat4 translation = glm::translate(glm::mat4(1.0f), position);
 	glm::mat4 scaling = glm::scale(glm::mat4(1.0f), scale);
 	s_transform = translation * scaling;
-	glm::vec3 bottomRight = {  0.5f, -0.5f, 0.0f };
-	glm::vec3 topRight	  = {  0.5f,  0.5f, 0.0f };
-	glm::vec3 topLeft	  = { -0.5f,  0.5f, 0.0f };
-	glm::vec3 bottomLeft  = { -0.5f, -0.5f, 0.0f };
+	glm::vec3 bottomRight = { 0.5f, -0.5f, 0.0f };
+	glm::vec3 topRight = { 0.5f,  0.5f, 0.0f };
+	glm::vec3 topLeft = { -0.5f,  0.5f, 0.0f };
+	glm::vec3 bottomLeft = { -0.5f, -0.5f, 0.0f };
 	glm::vec3 c = glm::vec3(color);
 
 	PushIndices({ 0, 1, 2, 2, 3, 0 });
 
-	PushVertex(bottomRight, c);
-	PushVertex(topRight,    c);
-	PushVertex(topLeft,     c);
-	PushVertex(bottomLeft,  c);
+	PushVertex(bottomRight, c, { 0, 0 });
+	PushVertex(topRight, c, { 1, 1 });
+	PushVertex(topLeft, c, { 0, 1 });
+	PushVertex(bottomLeft, c, { 1, 0 });
+
+	s_diffuse = s_whiteTex;
 
 	
 }
@@ -96,11 +108,67 @@ void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3&
 	DrawQuad(position, scale, glm::vec4(color, 1.0f));
 }
 
+void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const Texture& texture)
+{
+	s_quadCount++;
+	if (s_vertexCount > c_MAX_QUADS * 4 || texture.Handle() != s_diffuse.Handle()) { Flush(); }
+
+	glm::mat4 translation = glm::translate(glm::mat4(1.0f), position);
+	glm::mat4 scaling = glm::scale(glm::mat4(1.0f), scale);
+	s_transform = translation * scaling;
+	glm::vec3 bottomRight = { 0.5f, -0.5f, 0.0f };
+	glm::vec3 topRight = { 0.5f,  0.5f, 0.0f };
+	glm::vec3 topLeft = { -0.5f,  0.5f, 0.0f };
+	glm::vec3 bottomLeft = { -0.5f, -0.5f, 0.0f };
+	glm::vec3 c = { 1, 1, 1 };
+
+	PushIndices({ 0, 1, 2, 2, 3, 0 });
+
+	PushVertex(bottomRight, c, { 1, 0 });
+	PushVertex(topRight, c,    { 1, 1 });
+	PushVertex(topLeft, c,     { 0, 1 });
+	PushVertex(bottomLeft, c,  { 0, 0 });
+
+	s_diffuse = texture;
+}
+
+void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const Texture& texture, const TexRect& rect)
+{
+	s_quadCount++;
+	if (s_vertexCount > c_MAX_QUADS * 4 || texture.Handle() != s_diffuse.Handle()) { Flush(); }
+
+	glm::mat4 translation = glm::translate(glm::mat4(1.0f), position);
+	glm::mat4 scaling = glm::scale(glm::mat4(1.0f), scale);
+	s_transform = translation * scaling;
+	glm::vec3 bottomRight = { 0.5f, -0.5f, 0.0f };
+	glm::vec3 topRight = { 0.5f,  0.5f, 0.0f };
+	glm::vec3 topLeft = { -0.5f,  0.5f, 0.0f };
+	glm::vec3 bottomLeft = { -0.5f, -0.5f, 0.0f };
+	glm::vec3 c = { 1, 1, 1 };
+
+	PushIndices({ 0, 1, 2, 2, 3, 0 });
+
+	float leftUV = rect.pos.x / texture.Width();
+	float rightUV = leftUV + (rect.size.x / texture.Width());
+
+	float bottomUV = rect.pos.y / texture.Height();
+	float topUV = bottomUV + (rect.size.y / texture.Height());
+
+
+	PushVertex(bottomRight, c, { rightUV, bottomUV });
+	PushVertex(topRight, c,    { rightUV, topUV    });
+	PushVertex(topLeft, c,     { leftUV,  topUV    });
+	PushVertex(bottomLeft, c,  { leftUV,  bottomUV });
+
+	s_diffuse = texture;
+}
+
 void phnx::gfx::Renderer2D::Flush()
 {
 	s_batches++;
 	s_vbo->SetVertices(s_verts, s_vertexCount);
 	s_ibo->SetIndices(s_tris, s_indexCount);
+	s_diffuse.Attach(0);
 	s_shader.Use();
 	ogl::DrawIndexed(s_vao, s_ibo);
 	/*int done = 0;
@@ -116,11 +184,11 @@ void phnx::gfx::Renderer2D::Flush()
 	s_indexCount = 0;
 }
 
-void phnx::gfx::Renderer2D::PushVertex(const glm::vec3& position, const glm::vec3& color)
+void phnx::gfx::Renderer2D::PushVertex(const glm::vec3& position, const glm::vec3& color, const glm::vec2& uv0)
 {
 	glm::vec4 tPos = s_viewProj * s_transform * glm::vec4(position, 1.0f);
 	//tPos /= tPos.w;
-	s_verts[s_vertexCount++] = { {tPos.x, tPos.y, tPos.z}, color };
+	s_verts[s_vertexCount++] = { {tPos.x, tPos.y, tPos.z}, color, uv0 };
 }
 
 void phnx::gfx::Renderer2D::PushIndex(uint32_t index)

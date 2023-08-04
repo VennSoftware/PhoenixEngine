@@ -7,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <Phoenix/graphics/Renderer2D.hpp>
 #include <Phoenix/graphics/OrthoCamera.hpp>
+#include <Phoenix/graphics/opengl/Texture.hpp>
 using namespace phnx::gfx::buffers;
 using namespace phnx::gfx;
 class PhoenixApp : public phnx::Application {
@@ -17,6 +18,8 @@ class PhoenixApp : public phnx::Application {
 	std::shared_ptr<VertexArray> vao;
 	std::shared_ptr<IndexBuffer> ibo;
 	std::shared_ptr<phnx::gfx::Shader> shader;
+
+	Texture m_diffuse;
 
 	glm::vec3 position = { 0, 0, 0 }, scale = {1, 1, 1};
 	glm::mat4 transform = glm::mat4(1.0f);
@@ -32,6 +35,7 @@ class PhoenixApp : public phnx::Application {
 
 	virtual void OnCreate() override {
 		m_camera = std::make_shared<phnx::OrthographicCamera>(50.0f, 16.0f / 9.0f);
+		m_diffuse = Texture("assets/textures/aliens.png");
 	}
 
 	virtual void OnUpdate(float timestep) override {
@@ -80,7 +84,15 @@ class PhoenixApp : public phnx::Application {
 		for (int y = 0; y < 10; y++) {
 			for (int x = 0; x < 10; x++) {
 				Renderer2D::DrawQuad(
-					{ (float)x + viewWidth / 4, (float)y + viewHeight / 4, 0.1f }, { 0.90f, 0.90f, 1.0f }, { x / 10.0f, y / 10.0f, 1.0f}
+					{ (float)x + viewWidth / 4, (float)y + viewHeight / 4, 0.1f }, { 0.90f, 0.90f, 1.0f }, triColor
+				);
+			}
+		}
+
+		for (int y = 0; y < 10; y++) {
+			for (int x = 0; x < 10; x++) {
+				Renderer2D::DrawQuad(
+					{ (float)x + viewWidth / 4 + 5, (float)y + viewHeight / 4, 0.1f }, { 0.90f, 0.90f, 1.0f }, m_diffuse, { {4, 3}, {20, 23} }
 				);
 			}
 		}
@@ -127,6 +139,10 @@ class PhoenixApp : public phnx::Application {
 		ImGui::Text("Max Vertex Attributes: %d", ogl::MaxVertexAttribs());
 		ImGui::Text("GLSL Version: %s", ogl::GLSLVersion());
 		ImGui::Text("VRAM Usage %d/%d MB", ogl::MemoryUsed() / 1024, ogl::MemoryTotal() / 1024);
+
+		ImGui::Text("Diffuse: %s", m_diffuse.Path().c_str());
+		ImGui::Image((ImTextureID) m_diffuse.Handle(), {(float)m_diffuse.Width(),(float) m_diffuse.Height()});
+
 		Renderer2D::ResetStats();
 
 		ImGui::End();

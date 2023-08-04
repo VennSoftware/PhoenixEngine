@@ -15,7 +15,7 @@ The Phoenix Engine is a Graphics Engine created as a Learning platform for the [
 - OpenGL
 	 - [ ] 2D Batched Renderer
 		 - [x] Coloured Quads
-		 - [ ] Textured Quads
+		 - [x] Textured Quads
 		 - [ ] Custom Shader Pipeline
 		 - [ ] Circle Renderer
 		 - [ ] Line Renderer
@@ -26,5 +26,16 @@ The Phoenix Engine is a Graphics Engine created as a Learning platform for the [
 - ECS
 	- [ ] Custom ECS Implementation
 
+
+## Changelog
+
+### 0.1.0-rc.1 - Textures
+- Added Textures to Batch Renderer
+
+
+### 0.1.0-rc.0 - Initial Pre-Release
+- Added Batch Renderer
+- Added Dear ImGUI Support
+- Added OpenGL GPU Stats Functions (VRAM, Renderer, Vendor, GL Version, GLSL Version)
 
 
