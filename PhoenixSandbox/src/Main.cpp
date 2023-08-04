@@ -40,19 +40,19 @@ class PhoenixApp : public phnx::Application {
 		
 
 		if (glfwGetKey(window, GLFW_KEY_W)) {
-			m_camera->GetPosition().y -= 1.0f * timestep;
+			m_camera->GetPosition().y -= (1.0f * m_camera->GetSize() / 10.0f) * timestep;
 		}
 
 		if (glfwGetKey(window, GLFW_KEY_S)) {
-			m_camera->GetPosition().y += 1.0f * timestep;
+			m_camera->GetPosition().y += (1.0f * m_camera->GetSize() / 10.0f) * timestep;
 		}
 
 		if (glfwGetKey(window, GLFW_KEY_A)) {
-			m_camera->GetPosition().x -= 1.0f * timestep;
+			m_camera->GetPosition().x -= (1.0f * m_camera->GetSize() / 10.0f) * timestep;
 		}
 
 		if (glfwGetKey(window, GLFW_KEY_D)) {
-			m_camera->GetPosition().x += 1.0f * timestep;
+			m_camera->GetPosition().x += (1.0f * m_camera->GetSize() / 10.0f) * timestep;
 		}
 
 		if (glfwGetKey(window, GLFW_KEY_E)) {

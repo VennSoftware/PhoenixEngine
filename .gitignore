@@ -16,3 +16,8 @@ x64/Debug/PhoenixSandbox.exe - Shortcut.lnk
 vendor/Vulkan/x64/shaderc_combinedd.lib
 vendor/Vulkan/x64/SPIRV-Tools-optd.lib
 vendor/Vulkan/x64/shaderc_combined.lib
+x64/Debug/PhoenixEngine_debug.lib
+x64/Release/PhoenixSandbox.exe
+PhoenixSandbox/x64/Release/PhoenixSandbox.iobj
+PhoenixSandbox/x64/Release/PhoenixSandbox.ipdb
+PheonixEngine/include.zip
