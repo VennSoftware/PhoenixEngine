@@ -2,6 +2,8 @@
 #include <Phoenix/graphics/opengl/OpenGL.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <Phoenix/core/Profiling.hpp>
+
 
 using namespace phnx::gfx;
 
@@ -27,6 +29,8 @@ phnx::gfx::buffers::Vertex* phnx::gfx::Renderer2D::s_verts;
 phnx::gfx::Texture phnx::gfx::Renderer2D::s_diffuse;
 phnx::gfx::Texture phnx::gfx::Renderer2D::s_whiteTex;
 
+phnx::gfx::TextureLibrary phnx::gfx::Renderer2D::s_textures;
+
 struct GLQueryTimer {
 	uint32_t m_startID, m_endID;
 
@@ -35,6 +39,7 @@ struct GLQueryTimer {
 
 void phnx::gfx::Renderer2D::Initialize()
 {
+	PHNX_PROFILE_FUNCTION();
 	glGenQueries(1, &s_counter_id);
 
 	s_vao = std::make_shared<buffers::VertexArray>();
@@ -56,29 +61,35 @@ void phnx::gfx::Renderer2D::Initialize()
 		0xFF, 0xFF, 0xFF, 0xFF,
 	};
 	s_whiteTex = Texture(2, 2, pixels);
+
+	s_textures.Put("white", s_whiteTex);
 }
 
 void phnx::gfx::Renderer2D::BeginScene(const glm::mat4& viewProj)
 {
-	
-	s_indices.clear();
-	s_vertices.clear();
+	PHNX_PROFILE_FUNCTION();
 
 	s_viewProj = viewProj;
 }
+void phnx::gfx::Renderer2D::EnableBlending() {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void phnx::gfx::Renderer2D::DisableBlending() {
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
 
 void phnx::gfx::Renderer2D::EndScene() {
-	Flush();
-	
-
-	
-
-	
-
+	if (s_vertexCount > 0) {
+		Flush();
+	}
 }
 
 void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec4& color)
 {
+	PHNX_PROFILE_FUNCTION();
 	s_quadCount++;
 	if (s_vertexCount > c_MAX_QUADS * 4 || s_whiteTex.Handle() != s_diffuse.Handle()) { Flush(); }
 
@@ -110,6 +121,7 @@ void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3&
 
 void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const Texture& texture)
 {
+	PHNX_PROFILE_FUNCTION();
 	s_quadCount++;
 	if (s_vertexCount > c_MAX_QUADS * 4 || texture.Handle() != s_diffuse.Handle()) { Flush(); }
 
@@ -132,8 +144,41 @@ void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3&
 	s_diffuse = texture;
 }
 
+void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& color, const Texture& texture, const TexRect& rect)
+{
+	PHNX_PROFILE_FUNCTION();
+	s_quadCount++;
+	if (s_vertexCount > c_MAX_QUADS * 4 || texture.Handle() != s_diffuse.Handle()) { Flush(); }
+
+	glm::mat4 translation = glm::translate(glm::mat4(1.0f), position);
+	glm::mat4 scaling = glm::scale(glm::mat4(1.0f), scale);
+	s_transform = translation * scaling;
+	glm::vec3 bottomRight = { 0.5f, -0.5f, 0.0f };
+	glm::vec3 topRight = { 0.5f,  0.5f, 0.0f };
+	glm::vec3 topLeft = { -0.5f,  0.5f, 0.0f };
+	glm::vec3 bottomLeft = { -0.5f, -0.5f, 0.0f };
+	glm::vec3 c = color;
+
+	PushIndices({ 0, 1, 2, 2, 3, 0 });
+
+	float leftUV = rect.pos.x / texture.Width();
+	float rightUV = leftUV + (rect.size.x / texture.Width());
+
+	float bottomUV = rect.pos.y / texture.Height();
+	float topUV = bottomUV + (rect.size.y / texture.Height());
+
+
+	PushVertex(bottomRight, c, { rightUV, bottomUV });
+	PushVertex(topRight, c, { rightUV, topUV });
+	PushVertex(topLeft, c, { leftUV,  topUV });
+	PushVertex(bottomLeft, c, { leftUV,  bottomUV });
+
+	s_diffuse = texture;
+}
+
 void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const Texture& texture, const TexRect& rect)
 {
+	PHNX_PROFILE_FUNCTION();
 	s_quadCount++;
 	if (s_vertexCount > c_MAX_QUADS * 4 || texture.Handle() != s_diffuse.Handle()) { Flush(); }
 
@@ -156,15 +201,16 @@ void phnx::gfx::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3&
 
 
 	PushVertex(bottomRight, c, { rightUV, bottomUV });
-	PushVertex(topRight, c,    { rightUV, topUV    });
-	PushVertex(topLeft, c,     { leftUV,  topUV    });
-	PushVertex(bottomLeft, c,  { leftUV,  bottomUV });
+	PushVertex(topRight, c, { rightUV, topUV });
+	PushVertex(topLeft, c, { leftUV,  topUV });
+	PushVertex(bottomLeft, c, { leftUV,  bottomUV });
 
 	s_diffuse = texture;
 }
 
 void phnx::gfx::Renderer2D::Flush()
 {
+	PHNX_PROFILE_FUNCTION();
 	s_batches++;
 	s_vbo->SetVertices(s_verts, s_vertexCount);
 	s_ibo->SetIndices(s_tris, s_indexCount);

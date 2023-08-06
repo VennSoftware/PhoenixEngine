@@ -40,6 +40,12 @@
     <Filter Include="Source Files\graphics\OpenGL">
       <UniqueIdentifier>{5159881f-6f21-4126-84d5-ed223a59faeb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Input">
+      <UniqueIdentifier>{45d73ce3-92f5-4e0b-bdd0-b0c7716e64da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Input">
+      <UniqueIdentifier>{5693d7a8-20bf-4326-b830-3b6cb85e52ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stb_image.cpp">
@@ -93,6 +99,18 @@
     <ClCompile Include="src\graphics\opengl\Texture.cpp">
       <Filter>Source Files\graphics\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\input\Mouse.cpp">
+      <Filter>Source Files\Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Scene.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Entity.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\Profiling.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Phoenix\Core.hpp">
@@ -130,6 +148,24 @@
     </ClInclude>
     <ClInclude Include="include\Phoenix\graphics\opengl\Texture.hpp">
       <Filter>Header Files\graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\core\input\Mouse.hpp">
+      <Filter>Header Files\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\core\Scene.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\core\Components.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\core\Entity.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Phoenix\core\Profiling.hpp">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

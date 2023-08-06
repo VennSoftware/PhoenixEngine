@@ -24,14 +24,20 @@ The Phoenix Engine is a Graphics Engine created as a Learning platform for the [
 		- [ ] Material System
 		- [ ] Physically Based Renderer
 - ECS
-	- [ ] Custom ECS Implementation
+	- [x] ENTT integration
+
+- Core
+	- [ ] Split Window Out Into Platform Specific Modules
+	- [ ] 
 
 
 ## Changelog
 
+### 0.1.0-rc.2 - ENTT Support
+- Added ENTT Support
+
 ### 0.1.0-rc.1 - Textures
 - Added Textures to Batch Renderer
-
 
 ### 0.1.0-rc.0 - Initial Pre-Release
 - Added Batch Renderer
@@ -39,3 +45,7 @@ The Phoenix Engine is a Graphics Engine created as a Learning platform for the [
 - Added OpenGL GPU Stats Functions (VRAM, Renderer, Vendor, GL Version, GLSL Version)
 
 
+------------------------------
+## Stats
+- Times Broke MSVC C++ Compiler / Linker: 4
+- No. Of Times Rewrote Everything Because Reasons: 3

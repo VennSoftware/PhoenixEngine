@@ -1,4 +1,5 @@
 #include <Phoenix/graphics/opengl/OpenGL.hpp>
+#include <Phoenix/core/Profiling.hpp>
 
 
 void GLAPIENTRY
@@ -21,6 +22,7 @@ MessageCallback(GLenum source,
 void phnx::gfx::InitializeOpenGL()
 {
 	{
+		PHNX_PROFILE_FUNCTION();
 		gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		PHNX_LOG("OpenGL v%d.%d Loaded",
 			ogl::VersionMajor(), ogl::VersionMinor());
@@ -35,12 +37,14 @@ void phnx::gfx::InitializeOpenGL()
 
 void phnx::gfx::ogl::ClearColor(float r, float g, float b, float a)
 {
+	PHNX_PROFILE_FUNCTION();
 	glClearColor(r, g, b, a);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void phnx::gfx::ogl::DrawArrays(gfx::buffers::VertexArray& vao, size_t count)
 {
+	PHNX_PROFILE_FUNCTION();
 	vao.Bind();
 	glDrawArrays(GL_TRIANGLES, 0, count);
 	vao.Unbind();
@@ -49,6 +53,7 @@ void phnx::gfx::ogl::DrawArrays(gfx::buffers::VertexArray& vao, size_t count)
 
 void phnx::gfx::ogl::DrawArrays(std::shared_ptr<gfx::buffers::VertexArray> vao, size_t count)
 {
+	PHNX_PROFILE_FUNCTION();
 	vao->Bind();
 	glDrawArrays(GL_TRIANGLES, 0, count);
 	vao->Unbind();
@@ -56,6 +61,7 @@ void phnx::gfx::ogl::DrawArrays(std::shared_ptr<gfx::buffers::VertexArray> vao, 
 
 void phnx::gfx::ogl::DrawIndexed(std::shared_ptr<gfx::buffers::VertexArray> vao, std::shared_ptr<gfx::buffers::IndexBuffer> ibo)
 {
+	PHNX_PROFILE_FUNCTION();
 	vao->Bind();
 	ibo->Bind();
 	glDrawElements(GL_TRIANGLES, ibo->IndexCount(), GL_UNSIGNED_INT, nullptr);

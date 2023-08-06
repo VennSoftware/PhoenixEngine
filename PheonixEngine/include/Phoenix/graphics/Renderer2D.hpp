@@ -19,14 +19,20 @@ namespace phnx {
 			static void BeginScene(const glm::mat4& viewProj);
 			static void EndScene();
 
+			static void EnableBlending();
+			static void DisableBlending();
+
 			static void DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec4& color);
 			static void DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& color);
 			static void DrawQuad(const glm::vec3& position, const glm::vec3& scale, const Texture& texture);
 			static void DrawQuad(const glm::vec3& position, const glm::vec3& scale, const Texture& texture, const TexRect& rect);
-
+			static void DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& color, const Texture& texture, const TexRect& rect);
 
 			static RendererStats GetStats();
 			static void ResetStats();
+
+			static TextureLibrary& GetTextureLibrary() { return s_textures; }
+
 		protected:
 			static void Flush();
 			static void PushVertex(const glm::vec3& position, const glm::vec3& color, const glm::vec2& uv0);
@@ -58,6 +64,8 @@ namespace phnx {
 			static Texture s_diffuse;
 
 			static const size_t c_MAX_QUADS = 10000;
+
+			static TextureLibrary s_textures;
 		};
 	}
 }

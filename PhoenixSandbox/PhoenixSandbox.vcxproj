@@ -164,11 +164,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\panels\SceneListPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PheonixEngine\PhoenixEngine.vcxproj">
       <Project>{5877435a-4e07-4098-a636-6d3de7d9611e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\panels\SceneListPanel.hpp" />
+    <ClInclude Include="src\panels\Panels.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

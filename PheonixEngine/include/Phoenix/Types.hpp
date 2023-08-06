@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <map>
 
 #include <glm/mat4x4.hpp>
 #include <glm/vec2.hpp>

@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <fstream>
 #include <iostream>
+#include <Phoenix/core/Profiling.hpp>
 
 namespace phnx {
 	namespace gfx {
@@ -12,43 +13,51 @@ namespace phnx {
 
 		void Shader::UploadInt(const std::string& name, int v)
 		{
+			PHNX_PROFILE_FUNCTION();
 			int loc = glGetUniformLocation(m_program, name.c_str());
 			glUniform1i(loc, v);
 		}
 
 		void Shader::UploadInts(const std::string& name, const std::vector<int>& ints)
 		{
+			PHNX_PROFILE_FUNCTION();
 			int loc = glGetUniformLocation(m_program, name.c_str());
 			glUniform1iv(loc, ints.size(), ints.data());
 		}
 
 		void Shader::UploadFloat3(const std::string& name, const glm::vec3& v)
 		{
+			PHNX_PROFILE_FUNCTION();
 			glUniform3f(glGetUniformLocation(m_program, name.c_str()), v.x, v.y, v.z);
 		}
 
 		void Shader::UploadFloat2(const std::string& name, const glm::vec2& v)
 		{
+			PHNX_PROFILE_FUNCTION();
 			glUniform2f(glGetUniformLocation(m_program, name.c_str()), v.x, v.y);
 		}
 
 		void Shader::UploadFloat(const std::string& name, float v)
 		{
+			PHNX_PROFILE_FUNCTION();
 			glUniform1f(glGetUniformLocation(m_program, name.c_str()), v);
 		}
 
 		void Shader::UploadFloat4(const std::string& name, const glm::vec4& v)
 		{
+			PHNX_PROFILE_FUNCTION();
 			glUniform4f(glGetUniformLocation(m_program, name.c_str()), v.x, v.y, v.z, v.w);
 		}
 
 		void Shader::UploadMatrix4f(const std::string& name, const glm::mat4& mat)
 		{
+			PHNX_PROFILE_FUNCTION();
 			int loc = glGetUniformLocation(m_program, name.c_str());
 			glProgramUniformMatrix4fv(m_program, loc, 1, false, &mat[0][0]);
 		}
 
 		std::string ReadText(const std::string& path) {
+			PHNX_PROFILE_FUNCTION();
 			std::ifstream file(path, std::ios::ate);
 
 			if (file.is_open()) {
@@ -66,6 +75,7 @@ namespace phnx {
 
 		void Shader::CompileSrc(const std::string& vertexPath, const std::string& fragmentPath)
 		{
+			PHNX_PROFILE_FUNCTION();
 			uint32_t program = glCreateProgram();
 			uint32_t vertID, fragID;
 			vertID = glCreateShader(GL_VERTEX_SHADER);
@@ -121,6 +131,7 @@ namespace phnx {
 
 		std::shared_ptr<Shader> LoadShader(const std::string& vertexPath, const std::string& fragmentPath)
 		{
+			PHNX_PROFILE_FUNCTION();
 			uint32_t program = glCreateProgram();
 			uint32_t vertID, fragID;
 			vertID = glCreateShader(GL_VERTEX_SHADER);

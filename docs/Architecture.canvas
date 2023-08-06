@@ -1,0 +1,21 @@
+{
+	"nodes":[
+		{"type":"group","id":"4593f8f76ffdcbe3","x":-480,"y":-440,"width":1520,"height":400,"label":"Application Layer"},
+		{"type":"group","id":"b72a3c0335574e4f","x":-480,"y":520,"width":1520,"height":400,"label":"Platform Layer"},
+		{"type":"group","id":"02ba24be8c26b3d1","x":-480,"y":40,"width":1520,"height":400,"label":"Engine Layer"},
+		{"type":"text","text":"# EngineLayer.hpp","id":"c0f441ad3f823154","x":-160,"y":-40,"width":960,"height":80},
+		{"type":"text","text":"# Phoenix.hpp","id":"54c3ffe2d7438844","x":-160,"y":-520,"width":960,"height":80},
+		{"type":"text","text":"# Scene","id":"fc452ef400b2b20b","x":-460,"y":-425,"width":280,"height":50,"color":"4"},
+		{"type":"text","text":"# Application","id":"47972661175a518b","x":-460,"y":-280,"width":280,"height":60,"color":"1"},
+		{"type":"text","text":"# Phoenix","id":"4d88da3fc226982a","x":-460,"y":-200,"width":280,"height":60,"color":"3"},
+		{"type":"text","text":"# Keyboard","id":"c9ed3b6a2a50761f","x":-460,"y":-120,"width":280,"height":59,"color":"3"},
+		{"type":"text","text":"# Texture Library","id":"0689ce62398d1f2c","x":-460,"y":60,"width":280,"height":60,"color":"4"},
+		{"type":"text","text":"# Shader Library","id":"1e0fe2c0e52f2724","x":-460,"y":140,"width":280,"height":60,"color":"4"},
+		{"type":"text","text":"# Material Library","id":"d16cfc0f1c10d531","x":-160,"y":-280,"width":280,"height":60,"color":"4"},
+		{"type":"text","text":"# Entity","id":"d42fca2c84233815","x":-460,"y":-360,"width":280,"height":60,"color":"4"},
+		{"type":"text","text":"# Mouse","id":"4336a77ecaa56ce3","x":-160,"y":-425,"width":280,"height":50,"color":"3"},
+		{"type":"text","text":"# Gamepad","id":"d4a1c366213c3bee","x":-160,"y":-360,"width":280,"height":60,"color":"3"},
+		{"type":"text","text":"# PlatformLayer.hpp","id":"d6156462a2fcf503","x":-160,"y":440,"width":960,"height":80}
+	],
+	"edges":[]
+}

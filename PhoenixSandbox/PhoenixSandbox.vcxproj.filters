@@ -13,10 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Panels">
+      <UniqueIdentifier>{8364b96f-5bee-420c-9b0f-8f0ee92d5bd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\panels\SceneListPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\panels\Panels.hpp">
+      <Filter>Header Files\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="src\panels\SceneListPanel.hpp">
+      <Filter>Header Files\Panels</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

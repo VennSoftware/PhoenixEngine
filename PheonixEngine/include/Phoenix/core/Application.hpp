@@ -23,10 +23,14 @@ namespace phnx {
 	protected:
 		void Clear(float r, float g, float b, float a);
 		double DeltaTime() const { return deltaTime; }
+		double MouseScrollDelta();
+		glm::vec2 MousePosition();
 
 	protected:
 		std::unique_ptr<Window> m_window;
 	private:
-		double deltaTime;
+		void OnScroll(GLFWwindow* window, double xoffset, double yoffset);
+
+		double deltaTime, m_scroll;
 	};
 }

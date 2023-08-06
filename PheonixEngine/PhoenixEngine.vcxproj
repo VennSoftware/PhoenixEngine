@@ -28,6 +28,10 @@
     <ClCompile Include="..\vendor\imgui-docking\imgui_tables.cpp" />
     <ClCompile Include="..\vendor\imgui-docking\imgui_widgets.cpp" />
     <ClCompile Include="src\core\Application.cpp" />
+    <ClCompile Include="src\core\Entity.cpp" />
+    <ClCompile Include="src\core\input\Mouse.cpp" />
+    <ClCompile Include="src\core\Profiling.cpp" />
+    <ClCompile Include="src\core\Scene.cpp" />
     <ClCompile Include="src\core\Window.cpp" />
     <ClCompile Include="src\graphics\opengl\Buffer.cpp" />
     <ClCompile Include="src\graphics\opengl\OpenGL.cpp" />
@@ -38,9 +42,15 @@
     <ClCompile Include="src\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Phoenix.hpp" />
     <ClInclude Include="include\Phoenix\Core.hpp" />
     <ClInclude Include="include\Phoenix\core\Application.hpp" />
     <ClInclude Include="include\Phoenix\core\Common.hpp" />
+    <ClInclude Include="include\Phoenix\core\Components.hpp" />
+    <ClInclude Include="include\Phoenix\core\Entity.hpp" />
+    <ClInclude Include="include\Phoenix\core\input\Mouse.hpp" />
+    <ClInclude Include="include\Phoenix\core\Profiling.hpp" />
+    <ClInclude Include="include\Phoenix\core\Scene.hpp" />
     <ClInclude Include="include\Phoenix\core\Window.hpp" />
     <ClInclude Include="include\Phoenix\graphics\opengl\Buffer.hpp" />
     <ClInclude Include="include\Phoenix\graphics\opengl\OpenGL.hpp" />
@@ -158,6 +168,8 @@
       <ShowIncludes>false</ShowIncludes>
       <UseFullPaths>false</UseFullPaths>
       <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Full</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -206,6 +218,8 @@
       <ShowIncludes>false</ShowIncludes>
       <UseFullPaths>false</UseFullPaths>
       <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Full</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

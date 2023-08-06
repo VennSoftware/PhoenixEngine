@@ -1,44 +1,45 @@
-#include <Phoenix/core/Application.hpp>
-#include <Phoenix/graphics/opengl/OpenGL.hpp>
-#include <Phoenix/graphics/opengl/Shader.hpp>
-#include <imgui.h>
-#include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <Phoenix/graphics/Renderer2D.hpp>
-#include <Phoenix/graphics/OrthoCamera.hpp>
-#include <Phoenix/graphics/opengl/Texture.hpp>
+#include <Phoenix.hpp>
+#include <Phoenix/core/Profiling.hpp>
+#include "panels/Panels.hpp"
+
 using namespace phnx::gfx::buffers;
 using namespace phnx::gfx;
 class PhoenixApp : public phnx::Application {
 	
 	glm::vec3 bg = { 0.1f, 0.2f, 0.3f };
 	glm::vec3 triColor = {1, 1, 1};
-	std::shared_ptr<VertexBuffer> vbo;
-	std::shared_ptr<VertexArray> vao;
-	std::shared_ptr<IndexBuffer> ibo;
-	std::shared_ptr<phnx::gfx::Shader> shader;
 
 	Texture m_diffuse;
 
-	glm::vec3 position = { 0, 0, 0 }, scale = {1, 1, 1};
-	glm::mat4 transform = glm::mat4(1.0f);
-	float rotation = 0.0f;
-
-	int quadCount = 100;
-
 	std::shared_ptr<phnx::OrthographicCamera> m_camera;
+	std::shared_ptr<phnx::Scene> m_scene;
+	std::shared_ptr<phnx::SceneListPanel> m_sceneList;
 
 	void updateTransform() {
 	}
 
 
 	virtual void OnCreate() override {
-		m_camera = std::make_shared<phnx::OrthographicCamera>(50.0f, 16.0f / 9.0f);
-		m_diffuse = Texture("assets/textures/aliens.png");
+		m_camera = std::make_shared<phnx::OrthographicCamera>(10.0f, 16.0f / 9.0f);
+
+		Renderer2D::EnableBlending();
+		Renderer2D::GetTextureLibrary().Load("aliens", "assets/textures/aliens.png");
+
+		m_scene = std::make_shared<phnx::Scene>();
+
+		phnx::Entity ent = m_scene->CreateEntity("Hello");
+
+		auto& sprite = ent.AddComponent<phnx::SpriteComponent>();
+		sprite.m_texture = phnx::gfx::Renderer2D::GetTextureLibrary().Get("aliens");
+		sprite.m_rectSize = { sprite.m_texture.Width(), sprite.m_texture.Height() };
+
+		ent.GetComponent<phnx::TransformComponent>().m_position += glm::vec3(5, 3, 0);
+
 	}
 
 	virtual void OnUpdate(float timestep) override {
+
+		PHNX_PROFILE_FUNCTION();
 		auto window = m_window->Handle();
 
 		
@@ -73,63 +74,37 @@ class PhoenixApp : public phnx::Application {
 			if (size <= 0.1f) { size = 0.1f; }
 			m_camera->SetSize(size);
 		}
+
+		if (phnx::Mouse::ScrollDeltaY() < 0) {
+			float size = m_camera->GetSize();
+			float deltaSize = -(size * 0.1f);
+			size += deltaSize;
+			if (size <= 0.1f) { size = 0.1f; }
+			m_camera->SetSize(size);
+		}
+
+		if (phnx::Mouse::ScrollDeltaY() > 0) {
+			float size = m_camera->GetSize();
+			float deltaSize = (size * 0.1f);
+			size += deltaSize;
+			m_camera->SetSize(size);
+		}
+
+		
 	}
 
 	virtual void OnRender() override {
 		Clear(bg.r, bg.g, bg.b, 1);
-		Renderer2D::BeginScene(m_camera->GetViewProjection());
-		float viewWidth, viewHeight;
-		viewWidth = m_camera->Width();
-		viewHeight = m_camera->Height();
-		for (int y = 0; y < 10; y++) {
-			for (int x = 0; x < 10; x++) {
-				Renderer2D::DrawQuad(
-					{ (float)x + viewWidth / 4, (float)y + viewHeight / 4, 0.1f }, { 0.90f, 0.90f, 1.0f }, triColor
-				);
-			}
-		}
+		m_scene->Render(*m_camera);
 
-		for (int y = 0; y < 10; y++) {
-			for (int x = 0; x < 10; x++) {
-				Renderer2D::DrawQuad(
-					{ (float)x + viewWidth / 4 + 5, (float)y + viewHeight / 4, 0.1f }, { 0.90f, 0.90f, 1.0f }, m_diffuse, { {4, 3}, {20, 23} }
-				);
-			}
-		}
-		Renderer2D::EndScene();
+		Renderer2D::DisableBlending();
 	}
 
 	virtual void OnImGui() override {
+
+		PHNX_PROFILE_FUNCTION();
 		ImGui::Begin("Stats & Controls", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-		ImGui::Text("DeltaTime: %02.02f ms (%d fps)", DeltaTime() * 1000.0f, (int) (1.0f / DeltaTime()));
-		ImGui::ColorEdit3("Background Color", &bg.x);
-
-		ImGui::DragInt("Quad Count", &quadCount, 1.0f, 0, 10000);
-
-		if (ImGui::ColorEdit3("Triangle Color", &triColor.x)) {
-		}
-
-		if (ImGui::DragFloat3("Position", &position[0], 0.01f, 0.0f, 10.0f)) {
-			updateTransform();
-		}
-
-		if (ImGui::DragFloat3("Scale", &scale[0], 0.01f, 0.0f, 10.0f)) {
-			updateTransform();
-		}
-		ImGui::BeginDisabled();
-		if (ImGui::DragFloat3("Camera Pos", &(m_camera->GetPosition().x), 0.01f, 0.0f, 10.0f)) {
-			updateTransform();
-		}
-
-		ImGui::Text("Camera Scale: %f", m_camera->GetSize());
-		ImGui::EndDisabled();
-
-		float rot = glm::degrees(rotation);
-		if (ImGui::DragFloat("Rotation", &rot, 1, 0.0f, 360.0f)) {
-			rotation = glm::radians(rot);
-			updateTransform();
-		}
-		ImGui::NewLine();
+		ImGui::Text("DeltaTime: %02.02f ms (%d fs)", DeltaTime() * 1000.0f, (int) (1.0f / DeltaTime()));
 		ImGui::SeparatorText("Renderer Stats");
 		RendererStats stats = Renderer2D::GetStats();
 		ImGui::Text("Batches: %d", stats.batches);
@@ -140,12 +115,34 @@ class PhoenixApp : public phnx::Application {
 		ImGui::Text("GLSL Version: %s", ogl::GLSLVersion());
 		ImGui::Text("VRAM Usage %d/%d MB", ogl::MemoryUsed() / 1024, ogl::MemoryTotal() / 1024);
 
-		ImGui::Text("Diffuse: %s", m_diffuse.Path().c_str());
-		ImGui::Image((ImTextureID) m_diffuse.Handle(), {(float)m_diffuse.Width(),(float) m_diffuse.Height()});
-
 		Renderer2D::ResetStats();
 
+		m_scene->Update(1.0f);
+
 		ImGui::End();
+
+		ImGui::Begin("Texture List");
+
+		ImVec2 regionAvail = ImGui::GetContentRegionAvail();
+		TextureLibrary lib = Renderer2D::GetTextureLibrary();
+
+		for (auto& texture : lib.TextureMap()) {
+			const std::string& name = texture.first;
+			ImGui::Text("%s", name.c_str());
+			ImGui::SameLine(regionAvail.x -((ImGui::GetFontSize() * 3)));
+			if (ImGui::Button("RELOAD")) {
+				texture.second.Reload();
+			}
+			ImGui::Image((ImTextureID)texture.second.Handle(), {std::max((float)texture.second.Width(), 32.0f), std::max((float) texture.second.Height(), 32.0f)});
+		}
+
+		ImGui::End();
+
+	
+
+		phnx::Mouse::ResetScroll();
+
+
 	}
 
 

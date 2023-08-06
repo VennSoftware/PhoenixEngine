@@ -1,5 +1,6 @@
 #pragma once
 #include <Phoenix/Core.hpp>
+#include <unordered_map>
 
 namespace phnx {
 	namespace gfx {
@@ -31,10 +32,27 @@ namespace phnx {
 			uint32_t Height() const { return m_height; }
 			const std::string& Path() const { return m_path; }
 
+			void SetPixels(uint32_t width, uint32_t height, const uint8_t* pixels, ImageFormat format = ImageFormat::RGBA);
+
+			void Destroy();
+			void Reload();
+
 		private:
 			uint32_t m_id, m_width, m_height;
 			ImageFormat m_format;
 			std::string m_path;
+		};
+
+		class TextureLibrary {
+		public:
+			bool Exists(const std::string& name);
+			Texture& Get(const std::string& name);
+			void Put(const std::string& name, Texture texture);
+			void Load(const std::string& name, const std::string& path);
+			std::unordered_map<std::string, Texture> TextureMap() { return m_textures; }
+
+		private:
+			std::unordered_map<std::string, Texture> m_textures;
 		};
 	}
 }
